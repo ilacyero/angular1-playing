@@ -22,6 +22,9 @@ class PartiesList {
 
     $reactive(this).attach($scope);
 
+    this.fields = ['Name', 'State', 'Page'];
+    this.firstField = {criteria: 'Page', order: 0};
+    this.fieldsSelected = [{criteria: 'Page', order: 0}];
     this.perPage = 3;
     this.page = 1;
     this.sort = {
@@ -67,6 +70,38 @@ class PartiesList {
 
   sortChanged(sort) {
     this.sort = sort;
+  }
+
+  getSelected(pos) {
+    const _this = this;
+    return function(field) {
+      const selected = _this.fieldsSelected[pos] || {};
+      const value = field ? (selected.criteria = field) : selected.criteria;
+      if (field) {
+        console.log(_this.fieldsSelected);
+      }
+      return value;
+    }
+  }
+
+  firstCriteria(pos) {
+    const value = field ? (this.firstField.criteria = field) : this.firstField.criteria;
+    if (field) {
+      console.log(this.firstField);
+    }
+    return value;
+  }
+
+  firstOrder(order) {
+    return typeof(order) == 'number'  ? (this.firstField.order = order) : this.firstField.order;
+  }
+
+  getFields(pos) {
+    const self = this;
+    const selecteds = this.fieldsSelected.map(function(item) {return item.criteria;})
+    return this.fields.filter(function(item) {
+      return selecteds.indexOf(item) < 0;
+    });
   }
 }
 

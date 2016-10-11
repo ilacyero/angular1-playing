@@ -12,6 +12,21 @@
     </md-input-container>
 
     <parties-sort on-change="partiesList.sortChanged(sort)" property="name" order="1"></parties-sort>
+    <!-- <md-select ng-model="partiesSort.order" ng-change="partiesSort.changed()">
+      <md-option value="1"></md-option>
+    </md-select>
+      ng-model-options="{ getterSetter: true }"
+    -->
+    <md-input-container style="margin-right: 10px;">
+      <md-select ng-model="partiesList.getSelected(0)" placeholder="First criteria" ng-model-options="{ getterSetter: true }">
+        <md-option ng-repeat="field in partiesList.fields" value="{{field}}">{{field}}</md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container style="margin-right: 10px;">
+      <md-select ng-model="partiesList.getSelected(1)" placeholder="Second criteria" ng-model-options="{ getterSetter: true }">
+        <md-option ng-repeat="field in partiesList.getFields(1)" value="{{field}}">{{field}}</md-option>
+      </md-select>
+    </md-input-container>
   </div>
 
   <div layout="column" layout-gt-sm="row">
